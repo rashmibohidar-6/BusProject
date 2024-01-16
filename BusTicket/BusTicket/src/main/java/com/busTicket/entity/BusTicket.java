@@ -13,8 +13,9 @@ import lombok.NoArgsConstructor;
 public class BusTicket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ticketId;
+    private String ticketId;
     private String ticketNumber;
     private String ticketCode;
     private String ticketCost;
+
 }

@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: API-GATEWAY
+
+  security:
+    user:
+      name: user
+      password: password
+    basic:
+      enabled: true
+
+
+server:
+  port: 8085
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+cloud:
+  gateway:
+    routes:
+      - id: BUS-SERVICE
+        uri: lb://BUS-SERVICE   # Assuming MICROSERVICE1 is the name registered in Eureka
+        predicates:
+          - Path=/api/busOperator/**
+
+      - id: BUS-TICKET
+        uri: lb://BUS-TICKET
+        predicates:
+          - Path=/api/busticket/**
+
+      - id: PASSENGER-SERVICE
+        uri: lb://PASSENGER-SERVICE
+        predicates:
+          - Path=/api/passengers/**
+
+twilio:
+  account-sid: AC91c3d9a92b9141072360b7e72fe966ab
+  auth-token: 405f4b76d3a4050805023b95f4300d6e
+  phone-number: +12673802467
+
+
